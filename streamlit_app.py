@@ -7,35 +7,12 @@ import streamlit.components.v1 as components
 
 def main():
 
-    st.set_page_config(layout="wide", initial_sidebar_state='expanded')
-    github = """
-    <a href="https://github.com/mnobeidat13", target="_blank">
-      <img src="https://pbs.twimg.com/profile_images/1414990564408262661/r6YemvF9_400x400.jpg" alt="HTML tutorial" style="width:50px;height:50px;">
 
-    </a>
-    """
-
-    kaggle = """
-    <a href="https://www.kaggle.com/mohammedobeidat", target="_blank">
-      <img src="https://miro.medium.com/max/3200/1*K5NPQiLmq30qmkySiVb5JQ.jpeg" alt="HTML tutorial" style="width:100px;height:50px;">
-
-    </a>
-    """
-
-    linkedin = """
-    <a href="https://www.linkedin.com/in/mnobeidat/", target="_blank">
-      <img src="https://play-lh.googleusercontent.com/kMofEFLjobZy_bCuaiDogzBcUT-dz3BBbOrIEjJ-hqOabjK8ieuevGe6wlTD15QzOqw" alt="HTML tutorial" style="width:50px;height:50px;">
-
-    </a>
-    """
-    
-        
-    sidebar_header = '''This is a demo to illustrate a recommender system that finds similar items to a given clothing article or recommend items for a customer using 4 different approaches:'''
+    sidebar_header =  'H&M Fashion Recommendation System'
     
     page_options = ["Find similar items",
                     "Customer Recommendations",
-                    "Product Captioning",
-                    'Documentation']
+                    "Product Captioning"]
     
     st.sidebar.info(sidebar_header)
 
