@@ -156,10 +156,10 @@ def main():
             st.title('Data Overview And Visualize Data - Customer Recommendations')
             st.markdown('''Develop product recommendations based on data from previous transactions of H&M Groups with 53 online markets and approximately 4,850 stores., as well as from customer and product meta data. 
                 But with too many choices, customers might not quickly find what interests them or what they are looking for, and ultimately, they might not make a purchase. To enhance the shopping experience, product recommendations are key. More importantly, helping customers make the right choices also has a positive implications for sustainability, as it reduces returns, and thereby minimizes emissions from transportation.
-                The available meta data spans from simple data, such as garment type and customer age, to text data from product descriptions, to image data from garment images.This is the data overview for the CSV file: customers_rcmnds.csv.''')
+                The available meta data spans from simple data, such as garment type and customer age, to text data from product descriptions, to image data from garment images.''')
 
             # Thêm biểu đồ tròn
-            
+            st.markdown('<h2 style="color: red;">This is the data overview for the CSV file: customers_rcmnds.csv.</h2>', unsafe_allow_html=True)
             customer_counts = customers_rcmnds['customer'].value_counts()
             fig_pie = px.pie(labels=customer_counts.index, values=customer_counts.values, title="Customer Purchase Count")
             st.plotly_chart(fig_pie)
@@ -182,7 +182,17 @@ def main():
 
         #data articles
             articles = pd.read_csv('results/articles_rcmnds.csv')
-            st.markdown('This is the data overview for the CSV file.')
+            st.markdown('<h2 style="color: red;">Data overview for the articles_rcmnds.csv.</h2>', unsafe_allow_html=True)
+            # Data Visualization: Bar chart
+            st.header('Bar Chart - Frequency of Categories')
+            selected_column = st.selectbox('Select a column:', articles.columns)
+            articles[selected_column] = articles[selected_column].astype('category')
+            if articles[selected_column].dtype == 'category':
+                value_counts = articles[selected_column].value_counts()
+                fig_bar = px.bar(x=value_counts.index, y=value_counts.values, labels={'x': selected_column, 'y': 'Frequency'})
+                st.plotly_chart(fig_bar)
+            else:
+                st.write('Selected column is not categorical. Please choose a categorical column for the bar chart.')
             # Total number of rows and columns
             st.header('Data Shape')
             st.write('Number of rows:', articles.shape[0])
@@ -196,16 +206,8 @@ def main():
             st.header('Summary Statistics')
             st.write(articles.describe())
 
-            # Data Visualization: Bar chart
-            st.header('Bar Chart - Frequency of Categories')
-            selected_column = st.selectbox('Select a column:', articles.columns)
-            articles[selected_column] = articles[selected_column].astype('category')
-            if articles[selected_column].dtype == 'category':
-                value_counts = articles[selected_column].value_counts()
-                fig_bar = px.bar(x=value_counts.index, y=value_counts.values, labels={'x': selected_column, 'y': 'Frequency'})
-                st.plotly_chart(fig_bar)
-            else:
-                st.write('Selected column is not categorical. Please choose a categorical column for the bar chart.')
+            
+            
             st.stop()
 
 
